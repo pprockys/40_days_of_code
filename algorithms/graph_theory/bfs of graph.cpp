@@ -4,7 +4,7 @@
 void bfs(int start, vector<int> adj[], bool vis[], int N)
 {
     list<int>pp;   
-    pp.push(start);
+    pp.push_back(start);
     cout<<start<<" ";
     vis[start]=true;
     while(pp.size()!=0)
