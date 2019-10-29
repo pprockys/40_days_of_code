@@ -1,37 +1,29 @@
 //<pprockys>
-//Simple use of union find;
+//Implementation of union find;
 
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long lolo;
-#define pb push_back
-#define mp make_pair
+
+//arr pp[] is to manage parent of elements;
+//arr size[] is to store size of each disjoint set---initially 1 is stored;
+
 
 //find function;
-lolo find(lolo pp[],lolo a)
+int find(int a)
 {
     if(pp[a]==a)
     return a;
-    return pp[a]=find(pp,pp[a]);
+    return pp[a]=find(pp[a]);  //parent changes to the root parent while function returns;
 }
 
 //union function;
-void _union(lolo pp[],lolo a,lolo b)
+void union(int a,int b)
 {
-    if(find(pp,a)!=find(pp,b))
-    pp[find(pp,b)]=find(pp,a);
-}
- 
-int main() {
-	lolo nn,i,j=0,m,n;
-	cin>>nn;
-	lolo pp[nn+1];                 //array to store parent of each elements;
-	for(i=1;i<=nn;i++)
-	pp[i]=i;
-	for(i=1;i<nn;i++)
-	{
-	    cin>>m>>n;
-	    find(pp,m)!=find(pp,n)?_union(pp,m,n):continue;
-	}
-	return 0;
+    a=find(a);
+    b=find(b);
+    if(a!=b)
+    {
+       if(size[a]<size[b])
+       swap(a,b);
+       pp[b]=a;            //we always attach set having smaller size with the set having larger size;
+       size[a]+=size[b];
+    }
 }
