@@ -22,7 +22,7 @@ void _union(lolo pp[],lolo a,lolo b)
     if(find(pp,a)!=find(pp,b))
     pp[find(pp,b)]=find(pp,a);
 }
- 
+
 int main() {
 	lolo nn,i,j=0,m,n;
 	cin>>nn;
