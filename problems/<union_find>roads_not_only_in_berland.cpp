@@ -1,7 +1,6 @@
 //<pprockys>
 //Simple use of union find;
 //Codeforces ::problem_link----https://codeforces.com/contest/25/problem/D
-
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long lolo;
