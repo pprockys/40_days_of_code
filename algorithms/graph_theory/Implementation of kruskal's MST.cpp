@@ -29,9 +29,9 @@ int kruskal(int n,int pp[],int size[],vector<pair<int,pair<int,int>>>adj)
     sort(adj.begin(),adj.end());
     for(auto j=adj.begin();j!=adj.end();j++)
     {
-        int u=j->second.first;
-        int v=j->second.second;
-        if(find(pp,u)!=find(pp,v))
+        int u=find(pp,j->second.first);
+        int v=find(pp,j->second.second);
+        if(u!=v)
         {
             w+=j->first;
             Union(pp,size,u,v);
