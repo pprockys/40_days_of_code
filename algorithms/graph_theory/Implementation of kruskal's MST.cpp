@@ -50,7 +50,7 @@ int main() {
 	    size[i]=0;;
 	    pp[i]=i;
 	}
-	vector<pair<int,pair<int,int>>>adj;
+	vector<pair<int,pair<int,int>>> adj;
 	while(m--)
 	{
 	    int u,v,w;
