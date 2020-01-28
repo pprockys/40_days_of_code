@@ -1,0 +1,90 @@
+//<pprockys>
+//https://www.spoj.com/problems/IITWPC4I/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+ll find (ll pp[], ll a)
+{
+    if(pp[a] == a)
+    return a;
+    return pp[a] = find(pp,pp[a]);
+}
+ 
+void Union (ll pp[], ll size[], ll a, ll b,ll milk[])
+{
+    a=find(pp,a);
+    b=find(pp,b);
+    if(a!=b)
+    {
+        if(size[a]<size[b])
+        swap(a,b);
+        if(milk[b]==1)
+        milk[a]=1;
+        pp[b]=a;
+        size[a]+=size[b];
+    }
+}
+ 
+ll kruskal(vector<pair<ll,pair<ll,ll>>>adj,ll pp[],ll size[],ll n,ll milk[])
+{
+    sort(adj.begin(),adj.end());
+    ll ans=0;
+    for(auto i=adj.begin();i!=adj.end();++i)
+    {
+        ll w=i->first;
+        ll u=find(pp,i->second.first);
+        ll v=find(pp,i->second.second);
+        
+        if(u!=v&&(milk[u]!=1||milk[v]!=1))
+        {
+            Union(pp,size,u,v,milk);
+            ans+=w;
+        }
+    }
+    return ans;
+}
+ 
+int main() {
+    ll t,n;
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL); 
+    cout.tie(NULL); 
+    cin>>t;
+    ll i,j=0;
+    while(t--)
+    {
+       ll m;
+       cin>>n>>m;
+       ll milk[n+1];
+       for(i=1;i<=n;i++)
+       cin>>milk[i];
+       vector<pair<ll,pair<ll,ll>>>adj;
+       while(m--)
+       {
+           ll w;
+           cin>>i>>j>>w;
+           adj.push_back({w,{i,j}});
+       }
+       ll pp[n+1],size[n+1];
+       for(i=0;i<=n;i++)
+       {
+           pp[i]=i;
+           size[i]=1;
+       }
+       ll ans=kruskal(adj,pp,size,n,milk);
+       ll k=0;
+       for(i=1;i<=n;i++)
+       {
+          if(milk[find(pp,i)]==0)
+          k=1;
+       }
+       if(k)
+       cout<<"impossible\n";
+       else
+       cout<<ans<<"\n";
+    }
+	return 0;
+}
