@@ -23,7 +23,7 @@ int main() {
     list_of_prime();
     vector<int>adj[10009];
     int t,i,j,k;
-    sort(prime.begin(),prime.end());
+  //  sort(prime.begin(),prime.end());    //There is no need to sort ,prime vector is alredy sorted thus unnecessary wastage of time
     for(i=0;i<prime.size();i++)
     {
         for(j=i+1;j<prime.size();j++)
